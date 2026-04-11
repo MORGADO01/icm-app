@@ -21,46 +21,52 @@ body {
   min-height: 100vh;
 }
 
-/* HEADER */
+/* HEADER — faixa vermelha só na logo, info fora */
 .header {
-  background: var(--vermelho);
+  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 16px 16px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border-bottom: 1px solid var(--borda);
 }
 
-.logo { height: 80px; object-fit: contain; }
+.logo-faixa {
+  background: var(--vermelho);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.logo { height: 110px; object-fit: contain; }
 
 .header-info {
   text-align: center;
-  margin-top: 8px;
+  padding: 12px 16px 14px;
+  width: 100%;
 }
 
 .header-info h1 {
-  color: white;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  color: var(--texto);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
 }
 
 .header-info .data {
-  color: rgba(255,255,255,0.8);
+  color: var(--texto-suave);
   font-size: 13px;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .header-info .culto-nome {
-  color: white;
+  color: var(--vermelho);
   font-size: 14px;
-  font-weight: 600;
-  margin-top: 2px;
-  background: rgba(255,255,255,0.15);
-  padding: 2px 12px;
+  font-weight: 700;
+  margin-top: 6px;
+  background: #fde8e8;
+  padding: 3px 14px;
   border-radius: 20px;
   display: inline-block;
 }
@@ -322,4 +328,50 @@ body {
   .aba-btn { padding: 8px 14px; font-size: 13px; }
   .contador-valor { font-size: 22px; min-width: 36px; }
   .btn-contador { width: 40px; height: 40px; font-size: 20px; }
+}
+
+/* HISTÓRICO — detalhamento por categoria */
+.hist-detalhes { margin-bottom: 8px; }
+
+.hist-grupo {
+  margin-bottom: 8px;
+}
+
+.hist-grupo-titulo {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--vermelho);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 4px;
+}
+
+.hist-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.hist-linha:last-child { border-bottom: none; }
+
+.hist-cat {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.hist-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto);
+  min-width: 24px;
+  text-align: right;
+}
+
+.hist-obs {
+  font-size: 12px;
+  color: var(--texto-suave);
+  font-style: italic;
+  margin-top: 4px;
 }
