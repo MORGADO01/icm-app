@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Controle de Cultos — ICM</title>
+  <link rel="icon" href="img/icon_icm.png">
+  <link rel="apple-touch-icon" href="img/ico_icm.png">
+  <meta name="theme-color" content="#d91c1c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <img src="img/logo_icm.png" class="logo" alt="Logo ICM">
+  <div class="header-info">
+    <h1>Controle de Cultos</h1>
+    <div class="data" id="data-atual"></div>
+    <div class="culto-nome" id="culto-nome"></div>
+  </div>
+</header>
+
+<!-- ABAS -->
+<nav class="abas">
+  <button class="aba-btn" id="btn-ebd" data-aba="ebd">EBD</button>
+  <button class="aba-btn" id="btn-culto" data-aba="culto">Culto</button>
+  <button class="aba-btn" id="btn-evento" data-aba="evento">Evento</button>
+  <button class="aba-btn" id="btn-historico" data-aba="historico">Histórico</button>
+</nav>
+
+<main class="container">
+
+  <!-- ══════════════ EBD ══════════════ -->
+  <section class="secao" id="secao-ebd">
+
+    <div class="card">
+      <span class="card-label">Membros adultos</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="ebd" data-campo="adulto_membro" data-delta="-1">−</button>
+        <span class="contador-valor" id="ebd_adulto_membro">0</span>
+        <button class="btn-contador btn-mais" data-secao="ebd" data-campo="adulto_membro" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Membros crianças</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="ebd" data-campo="crianca_membro" data-delta="-1">−</button>
+        <span class="contador-valor" id="ebd_crianca_membro">0</span>
+        <button class="btn-contador btn-mais" data-secao="ebd" data-campo="crianca_membro" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Visitantes adultos</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="ebd" data-campo="adulto_visitante" data-delta="-1">−</button>
+        <span class="contador-valor" id="ebd_adulto_visitante">0</span>
+        <button class="btn-contador btn-mais" data-secao="ebd" data-campo="adulto_visitante" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Visitantes crianças</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="ebd" data-campo="crianca_visitante" data-delta="-1">−</button>
+        <span class="contador-valor" id="ebd_crianca_visitante">0</span>
+        <button class="btn-contador btn-mais" data-secao="ebd" data-campo="crianca_visitante" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="total-box">
+      <div class="total-label">Total geral</div>
+      <div class="total-valor" id="total_ebd">0</div>
+    </div>
+
+    <button class="btn-salvar" id="btn-salvar-ebd">Salvar EBD</button>
+  </section>
+
+  <!-- ══════════════ CULTO ══════════════ -->
+  <section class="secao" id="secao-culto">
+
+    <div class="card">
+      <span class="card-label">Membros</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="culto" data-campo="membros" data-delta="-1">−</button>
+        <span class="contador-valor" id="culto_membros">0</span>
+        <button class="btn-contador btn-mais" data-secao="culto" data-campo="membros" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Visitantes</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="culto" data-campo="visitantes" data-delta="-1">−</button>
+        <span class="contador-valor" id="culto_visitantes">0</span>
+        <button class="btn-contador btn-mais" data-secao="culto" data-campo="visitantes" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="total-box">
+      <div class="total-label">Total geral</div>
+      <div class="total-valor" id="total_culto">0</div>
+    </div>
+
+    <button class="btn-salvar" id="btn-salvar-culto">Salvar Culto</button>
+  </section>
+
+  <!-- ══════════════ EVENTO ══════════════ -->
+  <section class="secao" id="secao-evento">
+
+    <div class="campo-card">
+      <label for="nome-evento">Nome do evento</label>
+      <input type="text" id="nome-evento" placeholder="Ex: Congresso de Jovens">
+    </div>
+
+    <div class="subtitulo-secao">Membros</div>
+
+    <div class="card">
+      <span class="card-label">Adultos</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_adulto" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_m_adulto">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_adulto" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Adolescentes</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_adolescente" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_m_adolescente">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_adolescente" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Intermediários</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_intermediario" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_m_intermediario">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_intermediario" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Crianças</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_crianca" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_m_crianca">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_crianca" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Bebês</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_bebe" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_m_bebe">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_bebe" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="subtitulo-secao">Visitantes</div>
+
+    <div class="card">
+      <span class="card-label">Adultos</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_adulto" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_v_adulto">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_adulto" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Adolescentes</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_adolescente" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_v_adolescente">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_adolescente" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Intermediários</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_intermediario" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_v_intermediario">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_intermediario" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Crianças</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_crianca" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_v_crianca">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_crianca" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Bebês</span>
+      <div class="contador-controles">
+        <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_bebe" data-delta="-1">−</button>
+        <span class="contador-valor" id="evento_v_bebe">0</span>
+        <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_bebe" data-delta="1">+</button>
+      </div>
+    </div>
+
+    <div class="total-box">
+      <div class="total-label">Total geral</div>
+      <div class="total-valor" id="total_evento">0</div>
+    </div>
+
+    <div class="campo-card">
+      <label for="obs-evento">Observação (opcional)</label>
+      <textarea id="obs-evento" rows="3" placeholder="Alguma anotação sobre o evento..."></textarea>
+    </div>
+
+    <button class="btn-salvar" id="btn-salvar-evento">Salvar Evento</button>
+  </section>
+
+  <!-- ══════════════ HISTÓRICO ══════════════ -->
+  <section class="secao" id="secao-historico">
+    <div class="historico-titulo">Histórico</div>
+    <div id="historico"></div>
+  </section>
+
+</main>
+
+<!-- TOAST de feedback -->
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
