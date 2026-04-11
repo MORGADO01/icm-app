@@ -3,155 +3,148 @@ import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-d
 import { alterar, getDados, getTotal, resetar } from "./contadores.js";
 import { iniciarHistorico } from "./historico.js";
 
-// ─── CULTO DO DIA ────────────────────────────────────────────────────────────
-
+// ── CULTO DO DIA ──────────────────────────────────────────────────────────────
 const CULTOS = {
-  0: { manha: "EBD", tarde: "Culto de Glorificação" },
-  1: "Culto de Louvor",
-  2: "Culto Doutrinário",
-  3: "Culto de Senhoras",
-  4: "Culto de Oração",
-  5: "Culto no Lar",
-  6: "Culto de Glorificação",
+  0: { manha: 'EBD', tarde: 'Culto de Glorificação' },
+  1: 'Culto de Louvor',
+  2: 'Culto Doutrinário',
+  3: 'Culto de Senhoras',
+  4: 'Culto de Oração',
+  5: 'Culto no Lar',
+  6: 'Culto de Glorificação',
 };
-
-const DIAS = ["Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado"];
+const DIAS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 
 function getCultoAtual() {
   const agora = new Date();
-  const dia = agora.getDay();
-  const hora = agora.getHours();
-
+  const dia   = agora.getDay();
+  const hora  = agora.getHours();
   let nome, abaInicial;
-
   if (dia === 0) {
-    nome = hora < 12 ? CULTOS[0].manha : CULTOS[0].tarde;
-    abaInicial = hora < 12 ? "ebd" : "culto";
+    nome       = hora < 12 ? CULTOS[0].manha : CULTOS[0].tarde;
+    abaInicial = hora < 12 ? 'ebd' : 'culto';
   } else {
-    nome = CULTOS[dia];
-    abaInicial = "culto";
+    nome       = CULTOS[dia];
+    abaInicial = 'culto';
   }
-
   return {
     nome,
     abaInicial,
-    dataFormatada: agora.toLocaleDateString("pt-BR", {
-      weekday: "long", day: "2-digit", month: "long", year: "numeric"
+    dataFormatada: agora.toLocaleDateString('pt-BR', {
+      weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
     }),
   };
 }
 
-// ─── ABAS ─────────────────────────────────────────────────────────────────────
-
+// ── ABAS ──────────────────────────────────────────────────────────────────────
 function trocarAba(aba) {
-  document.querySelectorAll(".secao").forEach(s => s.classList.remove("ativa"));
-  document.querySelectorAll(".aba-btn").forEach(b => b.classList.remove("ativo"));
-
-  document.getElementById(`secao-${aba}`).classList.add("ativa");
-  document.getElementById(`btn-${aba}`).classList.add("ativo");
+  document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
+  document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('ativo'));
+  document.getElementById(`secao-${aba}`).classList.add('ativa');
+  document.getElementById(`btn-${aba}`).classList.add('ativo');
 }
 
-// ─── TOAST ────────────────────────────────────────────────────────────────────
-
-function mostrarToast(msg, tipo = "sucesso") {
-  const toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.className = `toast ${tipo} show`;
-  setTimeout(() => toast.classList.remove("show"), 2800);
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function toast(msg, tipo = 'sucesso') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${tipo} show`;
+  setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// ─── SALVAR ───────────────────────────────────────────────────────────────────
-
-async function salvar(dados, btnId) {
+// ── SALVAR ────────────────────────────────────────────────────────────────────
+async function salvar(dados, btnId, textoBotao) {
   const btn = document.getElementById(btnId);
   btn.disabled = true;
-  btn.textContent = "Salvando...";
-
+  btn.textContent = 'Salvando...';
   try {
-    await push(ref(db, "historico"), dados);
-    mostrarToast("Salvo com sucesso! ✓", "sucesso");
+    await push(ref(db, 'historico'), dados);
+    toast('Salvo com sucesso! ✓', 'sucesso');
     resetar(dados._secao);
+    // limpa campo nome do evento se for evento
+    if (dados._secao === 'evento') {
+      document.getElementById('nome-evento').value = '';
+      document.getElementById('obs-evento').value  = '';
+    }
   } catch (e) {
-    mostrarToast("Erro ao salvar. Verifique a conexão.", "erro");
+    toast('Erro ao salvar. Verifique a conexão.', 'erro');
   } finally {
     btn.disabled = false;
-    btn.textContent = dados._textoBotao;
+    btn.textContent = textoBotao;
   }
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-
-document.addEventListener("DOMContentLoaded", () => {
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
   const culto = getCultoAtual();
 
-  // Preenche header
-  document.getElementById("data-atual").textContent = culto.dataFormatada;
-  document.getElementById("culto-nome").textContent = culto.nome;
+  document.getElementById('data-atual').textContent = culto.dataFormatada;
+  document.getElementById('culto-nome').textContent = culto.nome;
 
-  // Aba inicial automática
   trocarAba(culto.abaInicial);
 
   // Botões de aba
-  document.querySelectorAll(".aba-btn").forEach(btn => {
-    btn.addEventListener("click", () => trocarAba(btn.dataset.aba));
+  document.querySelectorAll('.aba-btn').forEach(btn => {
+    btn.addEventListener('click', () => trocarAba(btn.dataset.aba));
   });
 
-  // Botões +/- (delegação de eventos)
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-secao][data-campo][data-delta]");
+  // Contadores +/- via delegação
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-secao][data-campo][data-delta]');
     if (!btn) return;
     alterar(btn.dataset.secao, btn.dataset.campo, Number(btn.dataset.delta));
   });
 
-  // Salvar EBD
-  document.getElementById("btn-salvar-ebd").addEventListener("click", () => {
+  // ── Salvar EBD
+  document.getElementById('btn-salvar-ebd').addEventListener('click', () => {
     salvar({
-      tipo: "EBD",
+      tipo: 'EBD',
       data: culto.dataFormatada,
-      ...getDados("ebd"),
-      _secao: "ebd",
-      _textoBotao: "Salvar EBD",
-    }, "btn-salvar-ebd");
+      ...getDados('ebd'),
+      _secao: 'ebd',
+    }, 'btn-salvar-ebd', 'Salvar EBD');
   });
 
-  // Salvar Culto
-  document.getElementById("btn-salvar-culto").addEventListener("click", () => {
+  // ── Salvar Culto
+  document.getElementById('btn-salvar-culto').addEventListener('click', () => {
     salvar({
-      tipo: "Culto",
+      tipo: 'Culto',
       nomeCulto: culto.nome,
       data: culto.dataFormatada,
-      ...getDados("culto"),
-      _secao: "culto",
-      _textoBotao: "Salvar Culto",
-    }, "btn-salvar-culto");
+      ...getDados('culto'),
+      _secao: 'culto',
+    }, 'btn-salvar-culto', 'Salvar Culto');
   });
 
-  // Salvar Evento
-  document.getElementById("btn-salvar-evento").addEventListener("click", () => {
-    const nome = document.getElementById("nome-evento").value.trim();
-    if (!nome) { mostrarToast("Informe o nome do evento.", "erro"); return; }
+  // ── Salvar Evento
+  document.getElementById('btn-salvar-evento').addEventListener('click', () => {
+    const nome = document.getElementById('nome-evento').value.trim();
+    if (!nome) { toast('Informe o nome do evento.', 'erro'); return; }
 
-    const dadosEvento = getDados("evento");
-    const membros = {
-      adulto: dadosEvento.m_adulto, adolescente: dadosEvento.m_adolescente,
-      crianca: dadosEvento.m_crianca, bebe: dadosEvento.m_bebe,
-    };
-    const visitantes = {
-      adulto: dadosEvento.v_adulto, adolescente: dadosEvento.v_adolescente,
-      crianca: dadosEvento.v_crianca, bebe: dadosEvento.v_bebe,
-    };
+    const d = getDados('evento');
 
     salvar({
-      tipo: "Evento",
+      tipo: 'Evento',
       nomeEvento: nome,
       data: culto.dataFormatada,
-      membros,
-      visitantes,
-      total: getTotal("evento"),
-      observacao: document.getElementById("obs-evento").value.trim(),
-      _secao: "evento",
-      _textoBotao: "Salvar Evento",
-    }, "btn-salvar-evento");
+      membros: {
+        adulto:        d.m_adulto,
+        adolescente:   d.m_adolescente,
+        intermediario: d.m_intermediario,
+        crianca:       d.m_crianca,
+        bebe:          d.m_bebe,
+      },
+      visitantes: {
+        adulto:        d.v_adulto,
+        adolescente:   d.v_adolescente,
+        intermediario: d.v_intermediario,
+        crianca:       d.v_crianca,
+        bebe:          d.v_bebe,
+      },
+      total: getTotal('evento'),
+      observacao: document.getElementById('obs-evento').value.trim(),
+      _secao: 'evento',
+    }, 'btn-salvar-evento', 'Salvar Evento');
   });
 
   // Histórico em tempo real
