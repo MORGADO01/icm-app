@@ -61,7 +61,12 @@ function CardHistorico({ item, onExcluir }) {
           <Text style={s.cardTitulo}>{titulo}</Text>
           <Text style={s.cardData}>{item.data || ''}</Text>
         </View>
-        <TouchableOpacity style={s.btnExcluir} onPress={onExcluir}>
+        <TouchableOpacity
+          style={s.btnExcluir}
+          onPress={onExcluir}
+          accessibilityRole="button"
+          accessibilityLabel={`Excluir registro: ${titulo}`}
+        >
           <Text style={{ fontSize: 18 }}>🗑️</Text>
         </TouchableOpacity>
       </View>

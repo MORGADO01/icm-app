@@ -10,11 +10,23 @@ export default function ContadorCard({ label, valor, onMais, onMenos }) {
     <View style={s.card}>
       <Text style={s.label}>{label}</Text>
       <View style={s.controles}>
-        <TouchableOpacity style={s.btnMenos} onPress={onMenos} activeOpacity={0.8}>
+        <TouchableOpacity
+          style={s.btnMenos}
+          onPress={onMenos}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          accessibilityLabel={`Diminuir ${label}`}
+        >
           <Text style={s.btnTexto}>−</Text>
         </TouchableOpacity>
-        <Text style={s.valor}>{valor}</Text>
-        <TouchableOpacity style={s.btnMais} onPress={onMais} activeOpacity={0.8}>
+        <Text style={s.valor} accessibilityLabel={`${label}: ${valor}`}>{valor}</Text>
+        <TouchableOpacity
+          style={s.btnMais}
+          onPress={onMais}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          accessibilityLabel={`Aumentar ${label}`}
+        >
           <Text style={s.btnTexto}>+</Text>
         </TouchableOpacity>
       </View>

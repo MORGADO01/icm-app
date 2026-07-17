@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const CULTOS = {
   0: { manha: 'EBD', tarde: 'Culto de Glorificação' },
@@ -12,14 +12,27 @@ const CULTOS = {
 
 const DIAS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 
+// Intervalo para reavaliar o culto/data atual (1 minuto)
+const INTERVALO_ATUALIZACAO_MS = 60 * 1000;
+
 /**
  * Retorna o culto do dia, aba inicial e data formatada.
+ * Se atualiza sozinho a cada minuto, então funciona corretamente mesmo
+ * se o app ficar aberto passando da meia-noite ou trocando de período (manhã/tarde).
  */
 export function useCultoAtual() {
+  const [agora, setAgora] = useState(() => new Date());
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setAgora(new Date());
+    }, INTERVALO_ATUALIZACAO_MS);
+    return () => clearInterval(intervalo);
+  }, []);
+
   return useMemo(() => {
-    const agora = new Date();
-    const dia   = agora.getDay();
-    const hora  = agora.getHours();
+    const dia  = agora.getDay();
+    const hora = agora.getHours();
 
     let nomeCulto, abaInicial;
 
@@ -36,5 +49,5 @@ export function useCultoAtual() {
     });
 
     return { nomeCulto, abaInicial, dataFormatada, diaSemana: DIAS[dia] };
-  }, []);
+  }, [agora]);
 }

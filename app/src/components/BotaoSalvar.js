@@ -8,6 +8,9 @@ export default function BotaoSalvar({ texto, onPress, carregando }) {
       onPress={onPress}
       disabled={carregando}
       activeOpacity={0.85}
+      accessibilityRole="button"
+      accessibilityLabel={carregando ? 'Salvando' : texto}
+      accessibilityState={{ disabled: carregando, busy: carregando }}
     >
       <Text style={s.texto}>{carregando ? 'Salvando...' : texto}</Text>
     </TouchableOpacity>
