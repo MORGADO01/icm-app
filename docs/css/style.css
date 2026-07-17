@@ -14,10 +14,17 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Nunito', 'Segoe UI', sans-serif;
   background: var(--cinza-fundo);
   color: var(--texto);
+  touch-action: manipulation;
   min-height: 100vh;
 }
 
@@ -155,8 +162,30 @@ body {
   font-size: 26px;
   font-weight: 700;
   min-width: 44px;
+  max-width: 64px;
   text-align: center;
   color: var(--texto);
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  padding: 4px 2px;
+  border-radius: 8px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  transition: background 0.15s;
+}
+
+.contador-valor:focus {
+  background: #f2f2f2;
+}
+
+/* remove setas do input em navegadores baseados em WebKit, caso o teclado
+   numérico do sistema use type="number" em algum fallback */
+.contador-valor::-webkit-outer-spin-button,
+.contador-valor::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* TOTAL */
@@ -218,7 +247,7 @@ body {
   border: 1.5px solid var(--borda);
   border-radius: 10px;
   padding: 10px 12px;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
   color: var(--texto);
   outline: none;
@@ -354,6 +383,6 @@ body {
 /* RESPONSIVO */
 @media (max-width: 420px) {
   .aba-btn        { padding: 8px 14px; font-size: 13px; }
-  .contador-valor { font-size: 22px; min-width: 36px; }
+  .contador-valor { font-size: 22px; min-width: 36px; max-width: 52px; }
   .btn-contador   { width: 40px; height: 40px; font-size: 20px; }
 }

@@ -1,6 +1,6 @@
 import { db } from "./firebase.js";
 import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { alterar, getDados, getTotal, resetar } from "./contadores.js";
+import { alterar, definir, getDados, getTotal, resetar } from "./contadores.js";
 import { iniciarHistorico } from "./historico.js";
 
 // ── CULTO DO DIA ──────────────────────────────────────────────────────────────
@@ -93,6 +93,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = e.target.closest('[data-secao][data-campo][data-delta]');
     if (!btn) return;
     alterar(btn.dataset.secao, btn.dataset.campo, Number(btn.dataset.delta));
+  });
+
+  // Digitação manual no contador (apenas números) — mantém o estado
+  // sincronizado para que os botões +/- continuem funcionando corretamente.
+  function campoDoContador(el) {
+    const [secao, ...resto] = el.id.split('_');
+    return { secao, campo: resto.join('_') };
+  }
+
+  document.addEventListener('input', (e) => {
+    const el = e.target;
+    if (!el.classList.contains('contador-valor')) return;
+    const somenteDigitos = el.value.replace(/[^0-9]/g, '');
+    if (somenteDigitos !== el.value) el.value = somenteDigitos;
+    const { secao, campo } = campoDoContador(el);
+    definir(secao, campo, somenteDigitos);
+  });
+
+  // Ao focar, seleciona o valor todo para facilitar sobrescrever digitando
+  document.addEventListener('focusin', (e) => {
+    const el = e.target;
+    if (el.classList.contains('contador-valor')) el.select();
+  });
+
+  // Se o campo ficar vazio ao sair, volta para 0
+  document.addEventListener('focusout', (e) => {
+    const el = e.target;
+    if (!el.classList.contains('contador-valor')) return;
+    if (el.value.trim() === '') {
+      const { secao, campo } = campoDoContador(el);
+      definir(secao, campo, 0);
+    }
   });
 
   // ── Salvar EBD

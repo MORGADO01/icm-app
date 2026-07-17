@@ -20,8 +20,21 @@ export function alterar(secao, campo, delta) {
   const estado = estados[secao];
   estado[campo] = Math.max(0, (estado[campo] || 0) + delta);
   const el = document.getElementById(`${secao}_${campo}`);
-  if (el) el.textContent = estado[campo];
+  if (el) el.value = estado[campo];
   atualizarTotal(secao);
+}
+
+// Usado quando o usuário digita o valor manualmente no campo.
+// Garante número inteiro >= 0 e mantém o botão +/- funcionando normalmente depois.
+export function definir(secao, campo, valorDigitado) {
+  const estado = estados[secao];
+  let valor = parseInt(valorDigitado, 10);
+  if (isNaN(valor) || valor < 0) valor = 0;
+  estado[campo] = valor;
+  const el = document.getElementById(`${secao}_${campo}`);
+  if (el) el.value = valor;
+  atualizarTotal(secao);
+  return valor;
 }
 
 function atualizarTotal(secao) {
@@ -43,7 +56,7 @@ export function resetar(secao) {
   Object.keys(estado).forEach((campo) => {
     estado[campo] = 0;
     const el = document.getElementById(`${secao}_${campo}`);
-    if (el) el.textContent = 0;
+    if (el) el.value = 0;
   });
   atualizarTotal(secao);
 }

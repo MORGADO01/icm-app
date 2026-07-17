@@ -1,47 +1,35 @@
 # ICM App — Controle de Cultos
 
-App React Native (Expo) para Android e iOS.
+Aplicação web para controle de contagem de EBD, Cultos e Eventos, com histórico salvo no Firebase Realtime Database.
 
 ## Estrutura
 
 ```
-app/
-├── App.js
-├── package.json
-├── assets/
-│   └── logo_icm.png        ← coloque a logo aqui
-└── src/
-    ├── config/
-    │   └── firebase.js     ← conexão Firebase
-    ├── services/
-    │   └── registroService.js  ← salvar/excluir/ouvir
-    ├── hooks/
-    │   ├── useContador.js
-    │   └── useCultoAtual.js
-    ├── components/
-    │   ├── ContadorCard.js
-    │   ├── BotaoSalvar.js
-    │   └── TotalBox.js
-    └── screens/
-        ├── EBDScreen.js
-        ├── CultoScreen.js
-        ├── EventoScreen.js
-        └── HistoricoScreen.js
+docs/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js           ← inicialização, abas, salvar, toasts
+│   ├── contadores.js     ← estado e lógica dos contadores
+│   ├── firebase.js       ← conexão com o Firebase
+│   └── historico.js      ← histórico em tempo real
+└── img/
+    ├── logo_icm.png
+    └── icon_icm.png
 ```
 
-## Como rodar
+## Como rodar localmente
+
+É uma aplicação estática (HTML/CSS/JS puro, sem build). Basta servir a pasta `docs/` com qualquer servidor local, por exemplo:
 
 ```bash
-cd app
-npm install
-npx expo start
+cd docs
+python3 -m http.server 8080
 ```
 
-Leia o QR Code com o app Expo Go no celular.
+Depois acesse `http://localhost:8080` no navegador.
 
-## Build para Android/iOS
+## Publicar (GitHub Pages)
 
-```bash
-npx eas build --platform android
-npx eas build --platform ios
-```
+A pasta `docs/` já está pronta para o GitHub Pages: em **Settings → Pages**, selecione a branch principal e a pasta `/docs` como origem.

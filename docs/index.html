@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Controle de Cultos — ICM</title>
   <link rel="icon" href="img/icon_icm.png">
   <link rel="apple-touch-icon" href="img/ico_icm.png">
@@ -42,7 +42,7 @@
       <span class="card-label">Membros adultos</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="ebd" data-campo="adulto_membro" data-delta="-1">−</button>
-        <span class="contador-valor" id="ebd_adulto_membro">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="ebd_adulto_membro" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="ebd" data-campo="adulto_membro" data-delta="1">+</button>
       </div>
     </div>
@@ -51,7 +51,7 @@
       <span class="card-label">Membros crianças</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="ebd" data-campo="crianca_membro" data-delta="-1">−</button>
-        <span class="contador-valor" id="ebd_crianca_membro">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="ebd_crianca_membro" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="ebd" data-campo="crianca_membro" data-delta="1">+</button>
       </div>
     </div>
@@ -60,7 +60,7 @@
       <span class="card-label">Visitantes adultos</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="ebd" data-campo="adulto_visitante" data-delta="-1">−</button>
-        <span class="contador-valor" id="ebd_adulto_visitante">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="ebd_adulto_visitante" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="ebd" data-campo="adulto_visitante" data-delta="1">+</button>
       </div>
     </div>
@@ -69,7 +69,7 @@
       <span class="card-label">Visitantes crianças</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="ebd" data-campo="crianca_visitante" data-delta="-1">−</button>
-        <span class="contador-valor" id="ebd_crianca_visitante">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="ebd_crianca_visitante" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="ebd" data-campo="crianca_visitante" data-delta="1">+</button>
       </div>
     </div>
@@ -89,7 +89,7 @@
       <span class="card-label">Membros</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="culto" data-campo="membros" data-delta="-1">−</button>
-        <span class="contador-valor" id="culto_membros">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="culto_membros" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="culto" data-campo="membros" data-delta="1">+</button>
       </div>
     </div>
@@ -98,7 +98,7 @@
       <span class="card-label">Visitantes</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="culto" data-campo="visitantes" data-delta="-1">−</button>
-        <span class="contador-valor" id="culto_visitantes">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="culto_visitantes" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="culto" data-campo="visitantes" data-delta="1">+</button>
       </div>
     </div>
@@ -125,7 +125,7 @@
       <span class="card-label">Adultos</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_adulto" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_m_adulto">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_m_adulto" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_adulto" data-delta="1">+</button>
       </div>
     </div>
@@ -134,7 +134,7 @@
       <span class="card-label">Adolescentes</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_adolescente" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_m_adolescente">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_m_adolescente" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_adolescente" data-delta="1">+</button>
       </div>
     </div>
@@ -143,7 +143,7 @@
       <span class="card-label">Intermediários</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_intermediario" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_m_intermediario">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_m_intermediario" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_intermediario" data-delta="1">+</button>
       </div>
     </div>
@@ -152,7 +152,7 @@
       <span class="card-label">Crianças</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_crianca" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_m_crianca">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_m_crianca" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_crianca" data-delta="1">+</button>
       </div>
     </div>
@@ -161,7 +161,7 @@
       <span class="card-label">Bebês</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="m_bebe" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_m_bebe">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_m_bebe" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="m_bebe" data-delta="1">+</button>
       </div>
     </div>
@@ -172,7 +172,7 @@
       <span class="card-label">Adultos</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_adulto" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_v_adulto">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_v_adulto" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_adulto" data-delta="1">+</button>
       </div>
     </div>
@@ -181,7 +181,7 @@
       <span class="card-label">Adolescentes</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_adolescente" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_v_adolescente">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_v_adolescente" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_adolescente" data-delta="1">+</button>
       </div>
     </div>
@@ -190,7 +190,7 @@
       <span class="card-label">Intermediários</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_intermediario" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_v_intermediario">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_v_intermediario" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_intermediario" data-delta="1">+</button>
       </div>
     </div>
@@ -199,7 +199,7 @@
       <span class="card-label">Crianças</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_crianca" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_v_crianca">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_v_crianca" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_crianca" data-delta="1">+</button>
       </div>
     </div>
@@ -208,7 +208,7 @@
       <span class="card-label">Bebês</span>
       <div class="contador-controles">
         <button class="btn-contador btn-menos" data-secao="evento" data-campo="v_bebe" data-delta="-1">−</button>
-        <span class="contador-valor" id="evento_v_bebe">0</span>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" class="contador-valor" id="evento_v_bebe" value="0" aria-label="Quantidade">
         <button class="btn-contador btn-mais" data-secao="evento" data-campo="v_bebe" data-delta="1">+</button>
       </div>
     </div>
